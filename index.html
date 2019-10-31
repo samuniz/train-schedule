@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+​
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Schedule</title>
+<!-- Ajax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+        type="text/css">
+<!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+<!-- ​CSS -->
+    <link rel="stylesheet" href="assets/css/normalize.css" type="text/css"> 
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+​
+</head>
+​
+<body>
+​
+    <div class="jumbotron jumbotron-fluid bg-info headerBox">
+        <div class="container">
+            <h1 class="display-4 text-light"><i class="fas fa-train"></i>Train Schedule</h1>
+            <p class="lead text-light">Get your train on time!!! <i
+                    class="fas fa-hourglass-start"></i></p>
+        </div>
+    </div>
+​
+    <header>
+​
+    </header>
+​
+    <div class="container formcontainer">
+        <div class="card searchP">
+            <div class="card-header"> <i class="fas fa-train"></i> Current Train Schedule</div>
+            <div class="employeeInput card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Train name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency (min)</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+            
+​
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="newRow">
+                            <th scope="row">Paoli/Thorndale</th>
+                            <td>Thorndale</td>
+                            <td>25</td>
+                            <td>5:35</td>
+                            <td>20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container formcontainer">
+        <div class="card searchP">
+            <div class="card-header"> <i class="fas fa-user-plus"></i> Add Train</div>
+            <div class="employeeInput card-body">
+                <form>
+                    <div class=""> <div class="form-group searchT">
+                        ​
+                        ​
+                                                    <label for="inputSearch">Train Name</label>
+                                                    <input type="text" class="form-control" id="trainName" placeholder="">
+                                                </div>
+                                                <div class="">
+                                                    <div class="form-group">
+                                                        <label for="inputRole">Destination</label>
+                                                        <input type="text" class="form-control" id="destination" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputDate">First Train Time (HH:mm military time) </label>
+                                                <input type="time" class="form-control" id="firstTrain" placeholder="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputRate">Frequency (min)s</label>
+                                                <input type="text" class="form-control" id="frequency" placeholder="">
+                                            </div>
+                        ​
+                                            <button type="button" class="btn btn-info submitButton" id="submit"> Submit</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        ​
+                        ​
+                            <div id="newResults"> </div>
+                            </div>
+                        ​
+                        ​
+                            <!-- Link to Moment.js should go here -->
+                            <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+                        ​
+                            <script src="assets/javascript/main.js" type="text/javascript">
+                        ​
+                        ​
+                            // JS GOES HERE. 
+                        ​
+                            </script>
+                        ​
+                        ​
+                        </body>
+                        ​
+                        </html>

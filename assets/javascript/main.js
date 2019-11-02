@@ -14,22 +14,27 @@ var firebaseConfig = {
 var database = firebase.database();
 var trainName; ""
 var destination; ""
+var frequency; 
 var firstTrain; ""
 
 //   Initial variables
-$("Button").on("click", function (event) {
+$("button").on("click", function (event) {
     event.preventDefault();
     trainName = $("#trainName").val().trim();
     console.log(trainName);
     destination = $("#destination").val().trim();
     console.log(destination);
-    firstTrain = $("#firstTrain").val().trim();
-    console.log(firstTrain);
+    frequency = $("#frequency").val();
+    console.log("This the frequency", frequency);
+    firstTrain = $("#firstTrain").val();
+    console.log("This the time", firstTrain);
     
     database.ref().push({
         trainName: trainName,
         destination: destination,
-        firstTrain: firstTrain,
+        frequency: frequency,
+        firstTrain: firstTrain
+
 
     });
 });
@@ -46,12 +51,42 @@ database.ref().on("child_added", function (snapshot) {
     var destinationTD = $("<td>");
     destinationTD.text(sv.destination);
     newRow.append(destinationTD);
-    var firstTrainTD = $("<td>");
-    firstTrainTD.text(sv.firstTrain);
-    newRow.append(firstTrainTD);
+    var frequencyTD = $("<td>");
+    frequencyTD.text(sv.frequency);
+    newRow.append(frequencyTD);
+    var arrivalTD = $("<td>");
+    arrivalTD.text(moment(nextTrain).format("hh:mm"));
+    newRow.append(arrivalTD);
+    
     var militaryFormat = "HH:mm";
-    var convertedTime = moment(sv.startTime, militaryFormat);
-    console.log(convertedTime.format("HH:mm"));
+    // First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeSV = moment(sv.firstTrain, "HH:mm").subtract(1, "years");
+    console.log("This is first time ", firstTimeSV);
+
+      // Current Time
+      var currentTime = moment();
+      console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeSV), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+     // Time apart (remainder)
+     var tRemainder = diffTime % parseInt(sv.frequency);
+     console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = parseInt(sv.frequency) - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+   
+    console.log("ABOUT to set text minutes", tMinutesTillTrain)
+    var minutesAwayTD = $("<td>");
+    minutesAwayTD.text(tMinutesTillTrain);
+    newRow.append(minutesAwayTD);
     // console.log(convertedDate.diff(moment(), "months"));
     // var monthsWorkedTD = $("<td>");
     // monthsWorkedTD.text(moment().diff(convertedDate, "months"));
@@ -64,5 +99,5 @@ database.ref().on("child_added", function (snapshot) {
     // var empBilledTD = $("<td>");
     // empBilledTD.text(empBilled);
     // newRow.append(empBilledTD);
-    // $("tbody").append(newRow);
+    $("tbody").append(newRow);
 });
